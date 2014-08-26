@@ -49,7 +49,7 @@ def generate_username(email):
     except User.DoesNotExist:
         pass
 
-    username = get_md5_hexdigest(email)
+    username =email.split("@")[0]
     found_unique_username = False
     while not found_unique_username:
         try:
@@ -101,7 +101,7 @@ class EmailRegistrationForm(forms.Form):
     password2 = forms.CharField(
         widget=forms.PasswordInput(attrs=attrs_dict, render_value=False),
         label=_("Password (repeat)"))
-    your_name = forms.CharField(required=False)
+#    your_name = forms.CharField(required=False)
 
     def clean_email(self):
         """
